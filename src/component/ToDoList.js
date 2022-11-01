@@ -41,6 +41,13 @@ export default class ToDoList extends Component {
     }]})
   }
 
+  removeTask = i => {
+    // this.state.toDos.splice(i,1);
+    this.setState({toDos: this.state.toDos.splice(i,1)});
+    console.log(this.state.toDos)
+    // console.log(i)
+  }
+
   render() {
     return (
       <div className="container">
@@ -48,7 +55,7 @@ export default class ToDoList extends Component {
         <AddTask newTask={this.addTask} />
         {this.state.toDos.map((item, i)=>{
          return (
-          <ToDoItem inputId={i} done={this.state.toDos[i].checked} key={item.No} onChange={(e)=>this.dalyTaskDonehandler(i,e)} massage={item.massage} num={item.No} />
+          <ToDoItem inputId={i} done={this.state.toDos[i].checked} key={item.No} onClick={()=>this.removeTask(i)} onChange={(e)=>this.dalyTaskDonehandler(i,e)} massage={item.massage} num={item.No} />
          )
         })}
       </div>

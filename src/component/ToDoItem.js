@@ -12,7 +12,7 @@ export default function ToDoItem(props) {
         <input type="checkbox" id={props.inputId} onChange={props.onChange} className="mx-2" />
         <label htmlFor={props.inputId} className={`m-0`}>{props.massage}</label>
       </div>
-      <button className={`btn btn-danger btn-sm`}>delet</button>
+      <button onClick={props.onClick} className={`btn btn-danger btn-sm`}>delet</button>
     </div>
   );
 }
