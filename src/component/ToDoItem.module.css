@@ -1,3 +1,30 @@
 .card{
     border-radius: 10px;
 }
+
+.button{
+    right: 20px;
+}
+
+.card label {
+    cursor: pointer;
+}
+
+.disable{
+    position: relative;
+}
+
+.disable label {
+    text-decoration: line-through;
+}
+
+.disable::before{
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.413);
+    border-radius: 10px;
+}
