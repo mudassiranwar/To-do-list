@@ -1,9 +1,13 @@
-import React from "react";
+import React,{ useState } from "react";
 import classes from "./ToDoItem.module.css";
 
 export default function ToDoItem(props) {
-  let taskDone = props.done
+
+  const [index,setIndex] = useState(props.num);
+  
+  let taskDone = props.done;
   return (
+    <>
     <div
       className={`d-flex align-items-center justify-content-between my-4 p-3 bg-white ${classes.card} ${taskDone && classes.disable}`}
     >
@@ -14,5 +18,6 @@ export default function ToDoItem(props) {
       </div>
       <button onClick={props.onClick} className={`btn btn-danger btn-sm`}>delet</button>
     </div>
+    </>
   );
 }

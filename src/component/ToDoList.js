@@ -6,23 +6,8 @@ export default class ToDoList extends Component {
   constructor() {
     super();
     this.state = {
-      toDos: [
-        {
-          No: 1,
-          massage: "this is massage 1",
-          checked: false,
-        },
-        {
-          No: 2,
-          massage: "this is massage 2",
-          checked: false,
-        },
-        {
-          No: 3,
-          massage: "this is massage 3",
-          checked: false,
-        },
-      ],
+      toDos: [],
+      index: 0
     };
   }
 
@@ -34,31 +19,46 @@ export default class ToDoList extends Component {
   }
 
   addTask = e => {
-    this.setState({toDos: [...this.state.toDos,{
-      No: this.state.toDos.length + 1,
+    this.setState({index:this.state.index+1});
+    let addIt = {
+      No: this.state.index,
       massage: e,
       checked: false
-    }]})
+    }
+    this.setState({toDos: [...this.state.toDos,addIt]})
   }
 
   removeTask = i => {
     // this.state.toDos.splice(i,1);
-    this.setState({toDos: this.state.toDos.splice(i,1)});
-    console.log(this.state.toDos)
+    // this.setState({toDos: this.state.toDos.splice(i,1)});
+    this.newToDos = this.state.toDos.filter(todo => todo.No !== i + 1);
+    console.log(i);
+    // console.log(this.newToDos);
+    this.setState({toDos:this.newToDos});
+    // this.setState((pre => ({...pre.toDos[i].No = i})));
+    
     // console.log(i)
   }
 
   render() {
+    // this.state.toDos.map((item,i)=>{
+    //   this.setState((pre => ({...pre.toDos[i].No = i})));
+    // })
     return (
+      <>
       <div className="container">
         <h1 className="my-3">todolist</h1>
         <AddTask newTask={this.addTask} />
+        <ol>
         {this.state.toDos.map((item, i)=>{
+          // this.setState((pre => ({...(pre.toDos[i].No = i)})));
          return (
-          <ToDoItem inputId={i} done={this.state.toDos[i].checked} key={item.No} onClick={()=>this.removeTask(i)} onChange={(e)=>this.dalyTaskDonehandler(i,e)} massage={item.massage} num={item.No} />
+          <li><ToDoItem  inputId={i} done={this.state.toDos[i].checked} key={item.No} onClick={()=>this.removeTask(i)} onChange={(e)=>this.dalyTaskDonehandler(i,e)} massage={item.massage} num={item.No} /></li>
          )
         })}
+        </ol>
       </div>
+      </>
     );
   }
 }
