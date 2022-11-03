@@ -18,7 +18,7 @@ export default class AddTask extends Component {
   onSubmitHandler = (e) => {
     if (this.state.task === "") {
       this.setState({ showError: true });
-      let errorTime = setTimeout(()=>this.setState({showError: false}),3000)
+      setTimeout(()=>this.setState({showError: false}),3000)
       return;
     }
     this.props.newTask(this.state.task);
