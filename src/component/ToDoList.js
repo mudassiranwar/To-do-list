@@ -21,10 +21,10 @@ export default class ToDoList extends Component {
     };
   }
 
-  dalyTaskDonehandler = (i, e) => {
-    let taskIsDone = e.target.checked;
-    this.setState((prev) => ({ ...(prev.toDos[i].checked = taskIsDone) }));
-  };
+  // dalyTaskDonehandler = (i, e) => {
+  //   let taskIsDone = e.target.checked;
+  //   this.setState((prev) => ({ ...(prev.toDos[i].checked = taskIsDone) }));
+  // };
 
   addTask = (e) => {
     this.setState({ index: this.state.index + 1 });
@@ -34,6 +34,7 @@ export default class ToDoList extends Component {
       // checked: false,
     };
     this.setState({ toDos: [addIt, ...this.state.toDos] });
+    setTimeout(()=>{localStorage.setItem("todo", JSON.stringify(this.state.toDos));},500)
   };
   
   removeTask = (item) => {
@@ -43,10 +44,10 @@ export default class ToDoList extends Component {
         return todo !== item;
       }),
     });
+    setTimeout(()=>{localStorage.setItem("todo", JSON.stringify(this.state.toDos));},1)
   };
 
   render() {
-    setTimeout(()=>{localStorage.setItem("todo", JSON.stringify(this.state.toDos));},500)
     return (
       <React.Fragment>
       <div className="container">
@@ -64,7 +65,7 @@ export default class ToDoList extends Component {
                     <ToDoItem
                       currentToDo={item}
                       onClick={() => this.removeTask(item)}
-                      onChange={(e) => this.dalyTaskDonehandler(i, e)}
+                      // onChange={(e) => this.dalyTaskDonehandler(i, e)}
                     />
                   </li>
                 );
