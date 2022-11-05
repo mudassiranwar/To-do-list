@@ -35,7 +35,7 @@ export default class ToDoList extends Component {
 
   render() {
     return (
-      <>
+      <React.Fragment>
         <div className="container">
           <h1 className="my-3">todolist</h1>
           <AddTask newTask={this.addTask} />
@@ -59,7 +59,7 @@ export default class ToDoList extends Component {
             </ol>
           )}
         </div>
-      </>
+      </React.Fragment>
     );
   }
 }
