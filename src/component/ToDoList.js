@@ -7,7 +7,6 @@ export default class ToDoList extends Component {
   constructor() {
     super();
 
-    
     let initToDo;
     
     if (localStorage.getItem("todo") === null) {
@@ -32,7 +31,7 @@ export default class ToDoList extends Component {
     let addIt = {
       No: this.state.index,
       massage: e,
-      checked: false,
+      // checked: false,
     };
     this.setState({ toDos: [addIt, ...this.state.toDos] });
   };
