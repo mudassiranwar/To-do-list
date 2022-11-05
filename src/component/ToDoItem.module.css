@@ -6,10 +6,6 @@
     right: 20px;
 }
 
-.card label {
-    cursor: pointer;
-}
-
 .disable{
     position: relative;
 }
