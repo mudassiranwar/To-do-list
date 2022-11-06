@@ -21,20 +21,21 @@ export default class ToDoList extends Component {
     };
   }
 
-  // dalyTaskDonehandler = (i, e) => {
-  //   let taskIsDone = e.target.checked;
-  //   this.setState((prev) => ({ ...(prev.toDos[i].checked = taskIsDone) }));
-  // };
+  dalyTaskDonehandler = (i, e) => {
+    let taskIsDone = e.target.checked;
+    this.setState((prev) => ({ ...(prev.toDos[i].checked = taskIsDone) }));
+    setTimeout(()=>{localStorage.setItem("todo", JSON.stringify(this.state.toDos));},500);
+  };
 
   addTask = (e) => {
     this.setState({ index: this.state.index + 1 });
     let addIt = {
       No: this.state.index,
       massage: e,
-      // checked: false,
+      checked: false,
     };
     this.setState({ toDos: [addIt, ...this.state.toDos] });
-    setTimeout(()=>{localStorage.setItem("todo", JSON.stringify(this.state.toDos));},500)
+    setTimeout(()=>{localStorage.setItem("todo", JSON.stringify(this.state.toDos));},500);
   };
   
   removeTask = (item) => {
@@ -65,7 +66,7 @@ export default class ToDoList extends Component {
                     <ToDoItem
                       currentToDo={item}
                       onClick={() => this.removeTask(item)}
-                      // onChange={(e) => this.dalyTaskDonehandler(i, e)}
+                      onChange={(e) => this.dalyTaskDonehandler(i, e)}
                     />
                   </li>
                 );
