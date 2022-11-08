@@ -1,18 +1,21 @@
-.card{
+.card {
     border-radius: 10px;
 }
 
-.button{
+.button {
     right: 20px;
 }
 
-.disable{
+.input {
+    cursor: pointer;
+}
+
+.disable {
     position: relative;
 }
 
 .disabled label {
     text-decoration: line-through;
-    cursor: pointer;
 }
 
 /* .disable::before{
