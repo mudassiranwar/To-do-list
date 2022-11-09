@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ToDoItem from "./ToDoItem";
 import AddTask from "./AddTask";
+import EditCard from "./EditCard";
+
 import classes from "./ToDoItem.module.css";
 
 export default class ToDoList extends Component {
@@ -8,6 +10,7 @@ export default class ToDoList extends Component {
     super();
 
     let initToDo;
+    let editObj;
 
     if (localStorage.getItem("todo") === null) {
       initToDo = [];
@@ -17,7 +20,7 @@ export default class ToDoList extends Component {
 
     this.state = {
       toDos: initToDo,
-      index: 0,
+      index: initToDo.length === 0 ? 0 : initToDo[initToDo.length - 1].No,
       showEdit: false,
     };
   }
@@ -43,14 +46,20 @@ export default class ToDoList extends Component {
     }, 500);
   };
 
-  onEditHandler = (item) => {
+  showEditHandler = (item ,i) => {
     this.setState({
       showEdit: true,
     });
+    this.editObj = this.state.toDos[i]
+    console.log(this.editObj);
+  };
+
+  setEditHandler = item => {
+    this.setState({showEdit:false})
+    console.log(item);
   };
 
   removeTask = (item) => {
-    this.setState({ index: this.state.index - 1 });
     this.setState({
       toDos: this.state.toDos.filter((todo) => {
         return todo !== item;
@@ -64,7 +73,9 @@ export default class ToDoList extends Component {
   render() {
     return (
       <React.Fragment>
-      {/* {this.state.showEdit && <EditCard />} */}
+        {this.state.showEdit && (
+          <EditCard initVal={this.editObj.massage} editedToDo={this.setEditHandler} />
+        )}
         <div className="container">
           <h1 className="my-3">To-Do-List</h1>
           <AddTask newTask={this.addTask} />
@@ -79,7 +90,7 @@ export default class ToDoList extends Component {
                   currentToDo={item}
                   onClick={() => this.removeTask(item)}
                   onChange={(e) => this.dalyTaskDonehandler(i, e)}
-                  onEditHandler={() => this.onEditHandler(item)}
+                  onEditHandler={() => this.showEditHandler(item, i)}
                   key={i}
                 />
               );
