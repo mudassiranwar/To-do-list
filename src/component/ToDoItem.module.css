@@ -10,9 +10,9 @@
     cursor: pointer;
 }
 
-.disable {
+/* .disable {
     position: relative;
-}
+} */
 
 .disabled label {
     text-decoration: line-through;
@@ -28,3 +28,7 @@
     background-color: rgba(0, 0, 0, 0.244);
     border-radius: 10px;
 } */
+
+.btn{
+    font-size: 20px;
+}
