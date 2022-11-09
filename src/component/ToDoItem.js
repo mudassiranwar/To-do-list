@@ -22,10 +22,10 @@ export default function ToDoItem(props) {
           <label className={`m-0`}>{props.currentToDo.massage}</label>
         </div>
         <div>
-          <button onClick={props.onEditHandler} className={`btn btn-danger btn-sm mx-3 ${classes.btn}`}>
+          <button onClick={props.onEditHandler} className={`btn btn-warning btn-sm mx-3 ${classes.btn}`}>
             <FaEdit />
           </button>
-          <button onClick={props.onClick} className={`btn btn-danger btn-sm ${classes.btn}`}>
+          <button onClick={props.onClick} className={`btn btn-danger text-dark btn-sm ${classes.btn}`}>
             <AiFillDelete />
           </button>
         </div>

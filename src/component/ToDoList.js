@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ToDoItem from "./ToDoItem";
 import AddTask from "./AddTask";
-import EditCard from "./EditCard";
 import classes from "./ToDoItem.module.css";
 
 export default class ToDoList extends Component {
@@ -65,7 +64,7 @@ export default class ToDoList extends Component {
   render() {
     return (
       <React.Fragment>
-      {this.state.showEdit && <EditCard />}
+      {/* {this.state.showEdit && <EditCard />} */}
         <div className="container">
           <h1 className="my-3">To-Do-List</h1>
           <AddTask newTask={this.addTask} />
