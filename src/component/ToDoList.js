@@ -10,6 +10,7 @@ export default class ToDoList extends Component {
     super();
 
     let initToDo;
+    let editIndex;
     let editObj;
 
     if (localStorage.getItem("todo") === null) {
@@ -30,7 +31,7 @@ export default class ToDoList extends Component {
     this.setState((prev) => ({ ...(prev.toDos[i].checked = taskIsDone) }));
     setTimeout(() => {
       localStorage.setItem("todo", JSON.stringify(this.state.toDos));
-    }, 500);
+    }, 1);
   };
 
   addTask = (e) => {
@@ -43,7 +44,7 @@ export default class ToDoList extends Component {
     this.setState({ toDos: [addIt, ...this.state.toDos] });
     setTimeout(() => {
       localStorage.setItem("todo", JSON.stringify(this.state.toDos));
-    }, 500);
+    }, 1);
   };
 
   showEditHandler = (item ,i) => {
@@ -51,12 +52,19 @@ export default class ToDoList extends Component {
       showEdit: true,
     });
     this.editObj = this.state.toDos[i]
-    console.log(this.editObj);
+    // console.log(this.editObj);
+    this.editIndex = i;
   };
 
-  setEditHandler = item => {
+  setEditHandler = (item,i) => {
     this.setState({showEdit:false})
-    console.log(item);
+    // console.log(this.editIndex);
+    this.setState((prev)=>({
+      ...(prev.toDos[this.editIndex].massage = item)
+    }));
+    setTimeout(() => {
+      localStorage.setItem("todo", JSON.stringify(this.state.toDos));
+    }, 1);
   };
 
   removeTask = (item) => {
