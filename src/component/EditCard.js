@@ -8,7 +8,6 @@ const EditCard = (props) => {
 
     const editChangeHandler = e => {
         setInputValue(e.target.value);
-        console.log(inputValue);
     }
 
     const setEditHandler = () => {

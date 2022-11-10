@@ -47,24 +47,28 @@ export default class ToDoList extends Component {
     }, 1);
   };
 
-  showEditHandler = (item ,i) => {
+  showEditHandler = (item, i) => {
     this.setState({
       showEdit: true,
     });
-    this.editObj = this.state.toDos[i]
+    this.editObj = this.state.toDos[i];
     // console.log(this.editObj);
     this.editIndex = i;
   };
 
-  setEditHandler = (item,i) => {
-    this.setState({showEdit:false})
-    // console.log(this.editIndex);
-    this.setState((prev)=>({
-      ...(prev.toDos[this.editIndex].massage = item)
-    }));
-    setTimeout(() => {
-      localStorage.setItem("todo", JSON.stringify(this.state.toDos));
-    }, 1);
+  setEditHandler = (item) => {
+    if (item.trim() === "") {
+      alert("error");
+    } else {
+      this.setState({ showEdit: false });
+      // console.log(this.editIndex);
+      this.setState((prev) => ({
+        ...(prev.toDos[this.editIndex].massage = item),
+      }));
+      setTimeout(() => {
+        localStorage.setItem("todo", JSON.stringify(this.state.toDos));
+      }, 1);
+    }
   };
 
   removeTask = (item) => {
@@ -82,7 +86,10 @@ export default class ToDoList extends Component {
     return (
       <React.Fragment>
         {this.state.showEdit && (
-          <EditCard initVal={this.editObj.massage} editedToDo={this.setEditHandler} />
+          <EditCard
+            initVal={this.editObj.massage}
+            editedToDo={this.setEditHandler}
+          />
         )}
         <div className="container">
           <h1 className="my-3">To-Do-List</h1>
