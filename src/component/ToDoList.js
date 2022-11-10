@@ -10,8 +10,8 @@ export default class ToDoList extends Component {
     super();
 
     let initToDo;
-    let editIndex;
-    let editObj;
+    // let editIndex;
+    // let editObj;
 
     if (localStorage.getItem("todo") === null) {
       initToDo = [];
@@ -23,10 +23,12 @@ export default class ToDoList extends Component {
       toDos: initToDo,
       index: initToDo.length === 0 ? 0 : initToDo[initToDo.length - 1].No,
       showEdit: false,
+      editObj:null,
+      editIndex:null,
     };
   }
 
-  dalyTaskDonehandler = (i, e) => {
+  taskDonehandler = (i, e) => {
     let taskIsDone = e.target.checked;
     this.setState((prev) => ({ ...(prev.toDos[i].checked = taskIsDone) }));
     setTimeout(() => {
@@ -50,10 +52,12 @@ export default class ToDoList extends Component {
   showEditHandler = (item, i) => {
     this.setState({
       showEdit: true,
+      editObj: this.state.toDos[i],
+      editIndex: i,
     });
-    this.editObj = this.state.toDos[i];
+    // this.editObj = this.state.toDos[i];
     // console.log(this.editObj);
-    this.editIndex = i;
+    // this.editIndex = i;
   };
 
   setEditHandler = (item) => {
@@ -63,7 +67,7 @@ export default class ToDoList extends Component {
       this.setState({ showEdit: false });
       // console.log(this.editIndex);
       this.setState((prev) => ({
-        ...(prev.toDos[this.editIndex].massage = item),
+        ...(prev.toDos[this.state.editIndex].massage = item),
       }));
       setTimeout(() => {
         localStorage.setItem("todo", JSON.stringify(this.state.toDos));
@@ -87,7 +91,7 @@ export default class ToDoList extends Component {
       <React.Fragment>
         {this.state.showEdit && (
           <EditCard
-            initVal={this.editObj.massage}
+            initVal={this.state.editObj.massage}
             editedToDo={this.setEditHandler}
           />
         )}
@@ -104,7 +108,7 @@ export default class ToDoList extends Component {
                 <ToDoItem
                   currentToDo={item}
                   onClick={() => this.removeTask(item)}
-                  onChange={(e) => this.dalyTaskDonehandler(i, e)}
+                  onChange={(e) => this.taskDonehandler(i, e)}
                   onEditHandler={() => this.showEditHandler(item, i)}
                   key={i}
                 />

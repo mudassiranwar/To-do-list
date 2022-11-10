@@ -1,13 +1,16 @@
+import React from 'react';
 import './App.css';
 import Header from './component/Header';
 import ToDoList from './component/ToDoList';
+import Footer from './component/Footer';
 
 function App() {
   return (
-    <div>
+    <React.Fragment>
       <Header />
       <ToDoList />
-    </div>
+      <Footer />
+    </React.Fragment>
   );
 }
 
