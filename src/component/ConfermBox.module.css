@@ -1,0 +1,8 @@
+.back{
+    background-color: rgba(0, 0, 0, 0.41);
+}
+
+.card{
+    transform: translate(-50%,-50%);
+    border-radius: 25px;
+}

@@ -74,23 +74,28 @@ export default class ToDoList extends Component {
     }
   };
 
-  // removeTask = (item) => {
-  //   this.setState({
-  //     toDos: this.state.toDos.filter((todo) => {
-  //       return todo !== item;
-  //     }),
-  //   });
-  //   setTimeout(() => {
-  //     localStorage.setItem("todo", JSON.stringify(this.state.toDos));
-  //   }, 1);
-  // };
-
-  removeTask = item =>{
+  removeTask = item => {
     this.setState({
-      deleteConfermBox:true,
-      deleteObj:item
-    })
+      toDos: this.state.toDos.filter((todo) => {
+        return todo !== item;
+      }),
+    });
+    this.setState({deleteConfermBox:false})
+    setTimeout(() => {
+      localStorage.setItem("todo", JSON.stringify(this.state.toDos));
+    }, 1);
+  };
+
+  dontDelete = () => {
+    this.setState({deleteConfermBox:false})
   }
+
+  showRemoveConfermBox = (item) => {
+    this.setState({
+      deleteConfermBox: true,
+      deleteObj: item,
+    });
+  };
 
   render() {
     return (
@@ -101,7 +106,13 @@ export default class ToDoList extends Component {
             editedToDo={this.setEditHandler}
           />
         )}
-        {/*  {this.state.deleteConfermBox && (<ConfermBox confermTrue={} confermFalse={} />)}  */}
+        {this.state.deleteConfermBox && (
+          <ConfermBox
+            massage={`Do you want to remove '${this.state.deleteObj.massage}'`}
+            confermTrue={()=>{this.removeTask(this.state.deleteObj)}}
+            confermFalse={this.dontDelete}
+          />
+        )}
         <div className="container">
           <h1 className="my-3">To-Do-List</h1>
           <AddTask newTask={this.addTask} />
@@ -114,7 +125,7 @@ export default class ToDoList extends Component {
               return (
                 <ToDoItem
                   currentToDo={item}
-                  onDelete={() => this.removeTask(item)}
+                  onDelete={() => this.showRemoveConfermBox(item)}
                   onChange={(e) => this.dalyTaskDonehandler(i, e)}
                   onEditHandler={() => this.showEditHandler(item, i)}
                   key={i}
