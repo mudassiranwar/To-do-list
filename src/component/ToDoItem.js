@@ -25,7 +25,7 @@ export default function ToDoItem(props) {
           <button onClick={props.onEditHandler} className={`btn btn-warning btn-sm mx-3 ${classes.btn}`}>
             <FaEdit />
           </button>
-          <button onClick={props.onClick} className={`btn btn-danger text-dark btn-sm ${classes.btn}`}>
+          <button onClick={props.onDelete} className={`btn btn-danger text-dark btn-sm ${classes.btn}`}>
             <AiFillDelete />
           </button>
         </div>
